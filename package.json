@@ -6,12 +6,24 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "startall": "concurrently \"node server.js\" \"bun run  startTokenUpdater.ts\""
   },
   "dependencies": {
+    "@types/uniqid": "^5.3.4",
+    "@types/uuid": "^10.0.0",
+    "concurrently": "^9.0.1",
+    "cors": "^2.8.5",
+    "html5-qrcode": "^2.3.8",
+    "ldrs": "^1.0.2",
+    "next": "14.2.13",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.2.13"
+    "react-hot-toast": "^2.4.1",
+    "react-icons": "^5.3.0",
+    "react-qrcode-logo": "^3.0.0",
+    "uniqid": "^5.4.0",
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "typescript": "^5",
@@ -21,6 +33,8 @@
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "eslint": "^8",
-    "eslint-config-next": "14.2.13"
-  }
+    "eslint-config-next": "14.2.13",
+    "@types/bun": "latest"
+  },
+  "type": "module"
 }

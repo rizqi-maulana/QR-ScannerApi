@@ -1,0 +1,26 @@
+{
+  "App_Name": "QR Absensi",
+  "admin": {
+    "Username": "admin",
+    "Password": "admin"
+  },
+  "UpdateUserToken": {
+    "hour": 24,
+    "minute": 15
+  },
+  "userLoggin": {
+    "label": "id"
+  },
+  "userIzin": [
+    { "title": "Sibuk" },
+    { "title": "Izin" },
+    { "title": "Tanpa Keterangan" },
+    { "title": "Cuti" },
+    { "title": "Lainnya" }
+  ],
+  "RegisterOptions": ["Dosen", "Mahasiswa"],
+  "RandomColor": {
+    "BackGround": ["#FFC700", "#FF9E7F", "#00B2FF"],
+    "Text": ["#BA2D00", "#720000", "#000616"]
+  }
+}
