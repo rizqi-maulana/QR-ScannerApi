@@ -3,6 +3,7 @@ import { Fragment, useContext } from 'react'
 import { AppContext } from '@/app/hook/Context'
 import Login from '@/app/login/page'
 import Users from '@/app/users/page'
+import Domain from '@/app/domain/page'
 export default function ValidatePage() {
   const context = useContext(AppContext)
   if (!context) {
@@ -11,7 +12,10 @@ export default function ValidatePage() {
   return (
     <Fragment>
       {
-        context.Access ? <Users /> : <Login />
+        context.SavedDomain ?
+          (context.Access ? <Users /> : <Login />)
+          :
+          <Domain />
       }
     </Fragment>
   )
