@@ -4,7 +4,7 @@ import type { NextRequest } from 'next/server';
 export function middleware(req: NextRequest) {
   const res = NextResponse.next();
 
-  res.headers.set('Access-Control-Allow-Origin', '*');
+  res.headers.set('Access-Control-Allow-Origin', 'https://qr-scanner-two-omega.vercel.app');
   res.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   res.headers.set('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Authorization');
   res.headers.set('Access-Control-Allow-Credentials', 'true');

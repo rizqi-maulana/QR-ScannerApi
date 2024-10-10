@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "startall": "concurrently \"node server.js\" \"bun run  startTokenUpdater.ts\""
+    "startall": "concurrently \"node server.js\" \"bun run TokenUpdater.ts\""
   },
   "dependencies": {
     "@types/uniqid": "^5.3.4",
