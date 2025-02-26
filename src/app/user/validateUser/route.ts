@@ -25,6 +25,8 @@ export async function POST(req: NextRequest) {
     let userData = null;
     for (const file of files) {
       const filePath = path.join(usersDirectory, file);
+         const stat = await fs.stat(filePath);
+      if (!stat.isFile()) continue;
       const fileData = await fs.readFile(filePath, 'utf-8');
       const parsedData = JSON.parse(fileData);
 

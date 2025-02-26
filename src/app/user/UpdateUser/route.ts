@@ -6,7 +6,7 @@ import { NextRequest } from 'next/server';
 
 export async function POST(req: NextRequest) {
   const Configuration = await loadConfiguration();
-  const { OldValueType, newValueType, password, email, no_hp, alamat, SelectData, image } = await req.json();
+  const { OldValueType, newValueType, password, email, no_hp, alamat, SelectData, image, status, jenis_kelamin } = await req.json();
 
   try {
     const usersDirectory = path.join(process.cwd(), 'public', "UserData", "Users");
@@ -15,6 +15,8 @@ export async function POST(req: NextRequest) {
 
     for (const file of files) {
       const filePath = path.join(usersDirectory, file);
+  const stat = await fs.stat(filePath);
+      if (!stat.isFile()) continue;
       const fileData = JSON.parse(await fs.readFile(filePath, 'utf-8'));
       if (fileData[Configuration.userLoggin.label] === OldValueType) {
         userFile = file;
@@ -35,7 +37,9 @@ export async function POST(req: NextRequest) {
       password: password || existingData.password,
       email: email || existingData.email,
       no_hp: no_hp || existingData.no_hp,
+      status,
       alamat: alamat || existingData.alamat,
+      jenis_kelamin: jenis_kelamin || existingData.jenis_kelamin,
       SelectData: SelectData || existingData.SelectData,
     };
 

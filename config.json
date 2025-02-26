@@ -8,9 +8,16 @@
     "hour": 24,
     "minute": 15
   },
+  "Waktu": {
+    "masuk": 8,
+    "pulang": 17,
+    "mulaiistirahat": 10,
+    "akhiristirahat": 12
+  },
   "userLoggin": {
     "label": "id"
   },
+
   "userIzin": [
     { "title": "Sibuk" },
     { "title": "Izin" },
@@ -19,6 +26,7 @@
     { "title": "Lainnya" }
   ],
   "RegisterOptions": ["Dosen", "Mahasiswa"],
+  "OptionsColor": ["#00EA1B", "#37BCFF"],
   "RandomColor": {
     "BackGround": ["#FFC700", "#FF9E7F", "#00B2FF"],
     "Text": ["#BA2D00", "#720000", "#000616"]

@@ -18,16 +18,18 @@ export async function POST(req: Request) {
 
   for (const file of files) {
     const filePath = path.join(UserDirectory, file);
+        const stat = await fs.stat(filePath);
+    if (!stat.isFile()) continue;
     const fileData = await fs.readFile(filePath, 'utf-8');
     const parsedData: UserData = JSON.parse(fileData);
 
     if (parsedData.token === token) {
-      const attendanceRecord = parsedData.absensi.find(
+      const attendanceRecord = parsedData.absensi.filter(
         (item: AbsensiItem) => item.date === Date
       );
 
       if (attendanceRecord) {
-        return new Response(JSON.stringify({ status: attendanceRecord.status }), { status: 200 });
+        return new Response(JSON.stringify({ data: attendanceRecord }), { status: 200 });
       } else {
         return new Response(JSON.stringify({ status: "Tidak Hadir" }), { status: 200 });
       }

@@ -1,7 +1,9 @@
 import { promises as fs } from 'fs';
+import { revalidatePath } from 'next/cache';
 import path from 'path';
 
 export async function GET() {
+  revalidatePath("/user/FetchUser");
   const usersDirectory = path.join(process.cwd(), 'public', "UserData", "Users");
 
   try {

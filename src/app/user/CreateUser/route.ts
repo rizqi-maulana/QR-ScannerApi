@@ -7,7 +7,7 @@ import { NextRequest } from 'next/server';
 
 export async function POST(req: NextRequest) {
   const Configuration = await loadConfiguration();
-  const { [Configuration.userLoggin.label]: TypeValue, nama_depan, nama_belakang, password, email, no_hp, alamat, SelectData, image } = await req.json();
+  const { [Configuration.userLoggin.label]: TypeValue, nama, password, email, no_hp, alamat, SelectData, image, jenis_kelamin, status } = await req.json();
 
   try {
     const base64Data = image.split(",")[1];
@@ -27,12 +27,13 @@ export async function POST(req: NextRequest) {
 
     const data = {
       [Configuration.userLoggin.label]: TypeValue,
-      nama_depan,
-      nama_belakang,
+      nama,
       password,
       email,
       no_hp,
       alamat,
+      jenis_kelamin,
+      status,
       Color: { BackGround: RandomBackground, Text: RandomText },
       Keterangan: { Hadir: 0, Izin: 0, TanpaKeterangan: 0 },
       ImagePath: `${fileName}.jpg`,
@@ -45,7 +46,7 @@ export async function POST(req: NextRequest) {
     await fs.writeFile(jsonFilePath, JSON.stringify(data, null, 2));
     await fs.writeFile(profileFilePath, buffer);
 
-    return new Response(JSON.stringify({ message: "Data saved successfully!" }), { status: 200 });
+    return new Response(JSON.stringify({ message: "Data berhasil di Tambahkan!" }), { status: 200 });
   } catch (error) {
     console.error("Error saving data:", error);
     return new Response(JSON.stringify({ message: "Error saving data" }));

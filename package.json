@@ -10,6 +10,7 @@
     "startall": "concurrently \"node server.js\" \"bun run TokenUpdater.ts\""
   },
   "dependencies": {
+    "@supabase/ssr": "^0.5.1",
     "@types/uniqid": "^5.3.4",
     "@types/uuid": "^10.0.0",
     "concurrently": "^9.0.1",

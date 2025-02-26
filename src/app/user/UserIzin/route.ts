@@ -5,13 +5,15 @@ import { NextRequest } from 'next/server';
 
 export async function POST(req: NextRequest) {
   const Configuration = await loadConfiguration();
-  const { IzinMessage, TypeValue } = await req.json();
+  const { IzinMessage, TypeValue, FromDate, UntilDate, ProofImage, IzinOptions } = await req.json();
   const usersDirectory = path.join(process.cwd(), 'public', "UserData", "Users");
 
   try {
     const files = await fs.readdir(usersDirectory);
     for (const file of files) {
       const filePath = path.join(usersDirectory, file);
+         const stat = await fs.stat(filePath);
+      if (!stat.isFile()) continue;
       const fileData = await fs.readFile(filePath, 'utf-8');
       const parsedData = JSON.parse(fileData);
 
@@ -20,8 +22,12 @@ export async function POST(req: NextRequest) {
         parsedData.absensi.unshift({
           date: new Date().toLocaleDateString("id-ID", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }),
           time: new Date().toLocaleTimeString("id-ID", { hour: 'numeric', minute: 'numeric', hour12: true }),
+          from: FromDate,
+          until: UntilDate,
+          proof: ProofImage,
           status: "Izin",
-          Keterangan: IzinMessage,
+          Description: IzinMessage,
+          Keterangan: IzinOptions,
         });
 
         await fs.writeFile(filePath, JSON.stringify(parsedData, null, 2), 'utf-8');

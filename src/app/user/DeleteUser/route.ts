@@ -19,6 +19,10 @@ export async function DELETE(req: NextRequest) {
   }
 
   const filePath = path.join(UserDirectory, matchingFile);
+      const stat = await fs.stat(filePath);
+    if (stat.isDirectory()) {
+      console.error("Error: Path mengarah ke direktori.");
+    }
   await fs.unlink(filePath);
 
   return new Response(JSON.stringify({ status: 200, message: "User deleted successfully" }), { status: 200 });
