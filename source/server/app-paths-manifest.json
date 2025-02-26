@@ -1,0 +1,7 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/user/FetchUser/route": "app/user/FetchUser/route.js",
+  "/user/DetailsUser/route": "app/user/DetailsUser/route.js",
+  "/config/route": "app/config/route.js",
+  "/user/UpdateUser/route": "app/user/UpdateUser/route.js"
+}
