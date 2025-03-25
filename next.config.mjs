@@ -2,6 +2,18 @@
 const nextConfig = {
   output: "standalone",
   distDir: "source",
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+      {
+        protocol: "http",
+        hostname: "**",
+      },
+    ],
+  },
   async headers() {
     return [
       {

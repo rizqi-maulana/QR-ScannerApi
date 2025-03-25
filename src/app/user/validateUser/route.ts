@@ -22,7 +22,6 @@ export async function POST(req: NextRequest) {
     const files = await fs.readdir(usersDirectory);
     const matchingFile = files.find(file => file.includes(TypeValue));
 
-    let userData = null;
     for (const file of files) {
       const filePath = path.join(usersDirectory, file);
          const stat = await fs.stat(filePath);
@@ -31,24 +30,28 @@ export async function POST(req: NextRequest) {
       const parsedData = JSON.parse(fileData);
 
       if (parsedData[Configuration.userLoggin.label] === TypeValue) {
-        userData = parsedData;
-        break;
+        if (parsedData.devices === 1) {
+            return new Response(JSON.stringify({ error: "Anda harus keluar dari perangkat sebelumnya" }), { status: 403 });
+        }
+        if (parsedData.password === password) {
+          parsedData.devices = 1;
+          await fs.writeFile(filePath, JSON.stringify(parsedData, null, 2), 'utf-8');
+          return new Response(JSON.stringify({
+            auth: "user",
+            lgn_us: parsedData.token,
+            user: Configuration.userLoggin.label,
+          }), { status: 200 });
+        } else {
+          return new Response(JSON.stringify({ error: "Password salah" }));
+        }
       }
     }
+
 
     if (!matchingFile) {
       return new Response(JSON.stringify({ error: `${Configuration.userLoggin.label} tidak ditemukan` }));
     }
 
-    if (userData.password === password) {
-      return new Response(JSON.stringify({
-        auth: "user",
-        lgn_us: userData.token,
-        user: Configuration.userLoggin.label,
-      }), { status: 200 });
-    } else {
-      return new Response(JSON.stringify({ error: "Password salah" }));
-    }
   } catch (error) {
     console.error(error);
     return new Response(JSON.stringify({ error: "Terjadi kesalahan saat memproses login" }));

@@ -14,20 +14,45 @@ export async function GET() {
     const filesData = await Promise.all(
       files.map(async (file) => {
         const filePath = path.join(usersDirectory, file);
+        
+        const stat = await fs.stat(filePath);
+        if (!stat.isFile() || !file.endsWith('.json')) {
+          return null; // Skip jika bukan file atau bukan file JSON
+        }
         const content = await fs.readFile(filePath, 'utf-8');
-        return {
-          content: JSON.parse(content),
-        };
+        return JSON.parse(content);
       })
     );
 
-    if (filesData.length === 0) {
-      return new Response(JSON.stringify({ message: "No files found", length: 0 }));
+    // Filter out null values (skipped files)
+    const validUsers = filesData.filter(user => user !== null);
+
+    if (validUsers.length === 0) {
+      return new Response(JSON.stringify({ message: "No files found", total: 0 }), {status: 404});
     }
 
-    return new Response(JSON.stringify({ filesData }), { status: 200 });
+    // Hitung jumlah aktif dan tidak aktif
+    const aktif = validUsers.filter(user => user.status === true).length;
+    const tidakAktif = validUsers.filter(user => user.status === false).length;
+
+    return new Response(JSON.stringify({ 
+      filesData, 
+      total: validUsers.length, 
+      aktif, 
+      tidakAktif
+    }), { 
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
   } catch (error) {
     console.error("Error reading directory:", error);
-    return new Response(JSON.stringify({ message: "Error reading directory" }));
+    return new Response(JSON.stringify({ message: "Error reading directory" }), {
+      status: 500,
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
   }
 }

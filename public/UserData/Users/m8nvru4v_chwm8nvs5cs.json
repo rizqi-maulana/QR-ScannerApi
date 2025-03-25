@@ -1,0 +1,56 @@
+{
+  "id": "m8nvru4v",
+  "nama": "Muhammad Rizqi Maulana",
+  "password": "123",
+  "email": "maulanarizq26@gmail.com",
+  "no_hp": "081933875047",
+  "alamat": "Jl. sakura IV no 23\nGomong Selaparang",
+  "devices": 0,
+  "jenis_kelamin": "Laki-laki",
+  "status": false,
+  "Color": {
+    "BackGround": "#00B2FF",
+    "Text": "#720000"
+  },
+  "Keterangan": {
+    "Hadir": 1,
+    "Izin": 1,
+    "TanpaKeterangan": 3
+  },
+  "ImagePath": "m8nvru4v_chwm8nvs5cs.jpg",
+  "SelectData": "Dosen",
+  "token": "a621f2bb-59a3-4ff9-93a2-377b6762af85",
+  "tokenExpiry": 1742956372251,
+  "absensi": [
+    {
+      "date": "Sabtu, 22 Maret 2025",
+      "time": "9.07 AM",
+      "from": "2025-03-22T09:06:39.123Z",
+      "until": "2025-03-23T09:06:00.000Z",
+      "proof": "Sabtu, 22 Maret 2025_2itlm8jzk82s.jpg",
+      "status": "Izin",
+      "Description": "Malas masuk",
+      "Keterangan": "Cuti"
+    },
+    {
+      "date": "Sabtu, 22 Maret 2025",
+      "time": "6.40 AM",
+      "status": "Tanpa Keterangan"
+    },
+    {
+      "date": "Sabtu, 22 Maret 2025",
+      "time": "6.10 AM",
+      "status": "Tanpa Keterangan"
+    },
+    {
+      "date": "Sabtu, 22 Maret 2025",
+      "time": "6.10 AM",
+      "status": "Tanpa Keterangan"
+    },
+    {
+      "date": "Senin, 15 Maret 2023",
+      "time": "10:00:00",
+      "status": "Hadir"
+    }
+  ]
+}

@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
 
       if (parsedData[Configuration.userLoggin.label] === TypeValue) {
         parsedData.Keterangan.TanpaKeterangan += 1;
-        parsedData.absensi.push({
+        parsedData.absensi.unshift({
           date: new Date().toLocaleDateString("id-ID", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }),
           time: new Date().toLocaleTimeString("id-ID", { hour: 'numeric', minute: 'numeric', hour12: true }),
           status: "Tanpa Keterangan",

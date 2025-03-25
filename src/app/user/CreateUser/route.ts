@@ -1,13 +1,12 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 import uniqid from 'uniqid';
-import { v4 as uuidv4 } from 'uuid';
 import { loadConfiguration } from '@/app/loadConfiguration';
 import { NextRequest } from 'next/server';
 
 export async function POST(req: NextRequest) {
   const Configuration = await loadConfiguration();
-  const { [Configuration.userLoggin.label]: TypeValue, nama, password, email, no_hp, alamat, SelectData, image, jenis_kelamin, status } = await req.json();
+  const { [Configuration.userLoggin.label]: TypeValue, nama, password, email, no_hp, alamat, SelectData, image, jenis_kelamin, status, token } = await req.json();
 
   try {
     const base64Data = image.split(",")[1];
@@ -19,11 +18,13 @@ export async function POST(req: NextRequest) {
     const RandomText = Configuration.RandomColor.Text[Math.floor(Math.random() * Configuration.RandomColor.Text.length)];
 
     const publicProfileDirectory = path.join(process.cwd(), 'public', "UserData", "Profile");
+    const publicUserDirectory = path.join(process.cwd(), 'public', "UserData", "Users");
     const fileName = `${TypeValue}_${uniqid()}`;
     const jsonFilePath = path.join(process.cwd(), 'public', "UserData", "Users", `${fileName}.json`);
     const profileFilePath = path.join(publicProfileDirectory, `${fileName}.jpg`);
 
     await fs.mkdir(publicProfileDirectory, { recursive: true });
+    await fs.mkdir(publicUserDirectory, { recursive: true });
 
     const data = {
       [Configuration.userLoggin.label]: TypeValue,
@@ -32,13 +33,14 @@ export async function POST(req: NextRequest) {
       email,
       no_hp,
       alamat,
+      devices: 0,
       jenis_kelamin,
       status,
       Color: { BackGround: RandomBackground, Text: RandomText },
       Keterangan: { Hadir: 0, Izin: 0, TanpaKeterangan: 0 },
       ImagePath: `${fileName}.jpg`,
       SelectData,
-      token: uuidv4(),
+      token: token,
       tokenExpiry: UserExpirationTime,
       absensi: [],
     };

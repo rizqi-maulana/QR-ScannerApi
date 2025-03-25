@@ -3,7 +3,7 @@ import { NextRequest } from 'next/server';
 import path from 'path';
 
 export async function POST(req: NextRequest) {
-  const { TypeValue, label } = await req.json();
+  const { token } = await req.json();
 
   const UserDirectory = path.join(process.cwd(), 'public', "UserData", "Users");
 
@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
       const Data = await fs.readFile(filePath, 'utf-8');
       const user = JSON.parse(Data);
 
-      if (user[label] === TypeValue) {
+      if (user.token === token) {
         return new Response(JSON.stringify({ user }), { status: 200 });
       }
     }

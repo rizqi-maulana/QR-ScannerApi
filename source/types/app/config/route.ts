@@ -1,4 +1,4 @@
-// File: C:\Users\WORKPLUS\Documents\API\qr-scanner-api\src\app\config\route.ts
+// File: D:\API\qr-scanner-api\src\app\config\route.ts
 import * as entry from '../../../../src/app/config/route.js'
 import type { NextRequest } from 'next/server.js'
 

@@ -1,5 +1,7 @@
 {
   "App_Name": "QR Absensi",
+  "institusi": "PT. MaulanaDev",
+  "endpoint": "localhost:3000",
   "admin": {
     "Username": "admin",
     "Password": "admin"
@@ -8,14 +10,9 @@
     "hour": 24,
     "minute": 15
   },
-  "Waktu": {
-    "masuk": 8,
-    "pulang": 17,
-    "mulaiistirahat": 10,
-    "akhiristirahat": 12
-  },
+  "Coordinates": [-8.585064410076038, 116.09623184324623],
   "userLoggin": {
-    "label": "id"
+    "label": "id" 
   },
 
   "userIzin": [
